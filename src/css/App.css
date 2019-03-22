@@ -1,0 +1,5 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  background-color: #D8D8D8;
+}
