@@ -1,0 +1,8 @@
+header{
+  max-width: 800px;
+  text-align: center;
+}
+
+header > img {
+  max-width: 400px;
+}
