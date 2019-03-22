@@ -61,7 +61,7 @@ class App extends Component {
         <p className="entice">
         This text is telling you that there is no more content. It urges you to try a link some where. 
         Perhaps to GitHub. 
-        Perhaps  to Screen AI.
+        Perhaps to Screen AI.
         </p>
 
         </section>
