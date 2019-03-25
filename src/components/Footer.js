@@ -18,10 +18,9 @@ class Footer extends Component {
             <div className="col l4 offset-l2 s12">
               <h5>Links</h5>
               <ul>
-                <li><a href="#!">Link 1</a></li>
-                <li><a href="#!">Link 2</a></li>
-                <li><a href="#!">Link 3</a></li>
-                <li><a href="#!">Link 4</a></li>
+                <li><a href="https://www.kaggle.com/panfritters/uci-heart-disease-dataset">Explore The Heart Predictor Model on Kaggle</a></li>
+                <li><a href="https://www.cdc.gov/nchs/nvss/deaths.htm">Centers for Disease Control</a></li>
+                <li><a href="https://www.who.int/healthinfo/mortality_data/en/">WHO World Mortality Data</a></li>
               </ul>
             </div>
           </div>
