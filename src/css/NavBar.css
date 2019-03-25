@@ -11,3 +11,7 @@
 .sticky + section {
   padding-top: 80px;
 }
+
+.nav-container{
+  width: 100%;
+}
