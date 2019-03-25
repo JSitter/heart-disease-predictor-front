@@ -10,8 +10,12 @@ class NavBar extends Component {
     });
   }
 
+  viewPredictor(){
+
+  }
+
   handleScroll(e, nav){
-    // console.log("Handle Scroll", nav)
+
     if(e.pageY >= 815){
       if(!nav.classList.contains('sticky')){
         nav.classList.add('sticky');
@@ -31,7 +35,9 @@ class NavBar extends Component {
           <div className="nav-wrapper">
             <a href="#" className="brand-logo">Heart Disease Prediction</a>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
-              <li><a href="sass.html">Screen AI</a></li>
+              <li><a href="https://www.kaggle.com/panfritters/uci-heart-disease-dataset" onClick={()=>{
+              console.log("This part coming soon!")
+              }}>Screen AI</a></li>
             
             </ul>
           </div>
