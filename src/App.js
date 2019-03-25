@@ -7,7 +7,7 @@ import Resources from './components/Resources';
 import Footer from './components/Footer';
 
 import './css/App.css';
-import './css/materialize.min.css'
+import './css/materialize.min.css';
 
 class App extends Component {
   render() {
