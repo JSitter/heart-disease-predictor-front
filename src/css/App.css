@@ -4,3 +4,10 @@
   align-items: center;
   background-color: #D8D8D8;
 }
+
+img{
+  margin-top: 50px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 50px;
+}
