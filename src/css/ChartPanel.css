@@ -13,6 +13,12 @@
 
 }
 
+.chart > img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
 .chart-container > h2 {
   margin-left: -50px;
 }
