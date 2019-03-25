@@ -4,6 +4,10 @@
   width: 100%;
 }
 
+.sticky{
+  background-color: rgba(228, 228, 228, 0.9);
+}
+
 .sticky + section {
-  padding-top: 80px
+  padding-top: 80px;
 }
