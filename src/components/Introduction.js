@@ -7,14 +7,17 @@ class Introduction extends Component {
   render(){
     return(
         <section className="long-descriptive">
-          <h2>Heart Disease Things that may surprise you.</h2>
+          <h2>Taking Care of Your Heart is Important</h2>
           <img className='right' src='https://source.unsplash.com/350x500/?anatomical-heart' alt='Your heart is special.'/>
           
           <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          As we go about our daily life we fit a model of the world around us in our head. This model is based on what we see and experience and while important to us for giving us a clue about where we find ourselves, may not be accurate in terms when compared with objective reality.
           </p>
           <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          Our individual experiences don't take into account what happens over a large selection of the population. Many people may be able to look out for a few diseases or accidents but may not have an idea as to what particular event or disease is more likely.
+          </p>
+          <p>
+          Many people may be surprised to know that Heart Disease is not a leading killer, but the single largest killer worldwide. Only through data and research can we begin to understand the risks associated with the lifestyles we have each chosen.
           </p>
           
         </section>
