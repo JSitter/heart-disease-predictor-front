@@ -21,3 +21,10 @@ nav{
 .nav-container{
   width: 100%;
 }
+
+@media only screen and (max-width: 650px) {
+  .brand-logo {
+    text-align: center;
+    width: 100%;
+  }
+}

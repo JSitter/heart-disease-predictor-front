@@ -14,11 +14,17 @@ p {
   font-family: Bitter, 'Times New Roman', Times, serif, san-serif;
 }
 
-
+section{
+  padding-bottom: 100px;
+}
 
 img{
   margin-top: 0px;
   margin-left: 25px;
   margin-right: 25px;
   margin-bottom: 25px;
+}
+
+p{
+  margin: 10px;
 }
