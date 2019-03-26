@@ -37,7 +37,7 @@ class NavBar extends Component {
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               <li><a href="https://www.kaggle.com/panfritters/uci-heart-disease-dataset" onClick={()=>{
               console.log("This part coming soon!")
-              }}>Screen AI</a></li>
+              }}>View Descriptive Notebook</a></li>
             
             </ul>
           </div>
