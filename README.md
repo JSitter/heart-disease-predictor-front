@@ -19,8 +19,6 @@ docker-compose up
 
 This will download the required dependencies. After all dependencies are installed the application will be available on 127.0.0.1:3000.
 
-The server will start and output the address that you can access it from in your favorite browser.
-
 ## Backend technology
 
 The backend is only a simple express server that serves React pages.
