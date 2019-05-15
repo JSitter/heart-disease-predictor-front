@@ -14,6 +14,7 @@ To install clone this repository.
 In the terminal `cd` into the project directory and run:
 
 ```
+docker-compose build
 docker-compose up
 ```
 
