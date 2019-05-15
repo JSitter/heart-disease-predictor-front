@@ -6,112 +6,55 @@ import '../css/Predictor.css';
 
 class Predictor extends Component {
   constructor(props){
-    super(props);
-
-    this.fetchDataset = this.fetchDataset.bind(this);
-    this.buildMLModel = this.buildMLModel.bind(this);
-    // Initialize line with random starting values
-    this.m = tf.variable(tf.scaler(8));
-    this.b = tf.variable(tf.scaler(2));
-    const learningRate = 0.01
-    this.optimizer = tf.train.sgd(learningRate)
+    super(props)
+    this.state = {
+      'age':'',
+      'sex':'',
+      'cp':'',
+      'trestbps':'',
+      'thalach':'',
+      'exang':'',
+      'oldpeak' :'',
+      'slope':'',
+      'target':''
+    }
+    this.handleChange = this.handleChange.bind(this)
+    this.fetchPrediction = this.fetchPrediction.bind(this)
   }
 
-  loss(preds, labels){
-    return preds.sub(labels).squared().mean();
-  }
-
-  predict(xs){
-    const tfxs = tf.tensor1d(xs);
-    // y = mx+ b
-    // Get value at x on line
-    return tfxs.mul(this.m).add(this.b);
-  }
-
-  fetchDataset(){
-    return new Promise((resolve, reject)=>{
-      const backendLocation = 'https://heart-disease-backend.herokuapp.com/';
-
-      fetch(backendLocation).then((response)=>{
-        if(response.status !== 200){
-          console.log()
-          reject('Error returned from backend server: '+ response.statusText);
-        }else{
-          response.json().then((data)=>{
-            resolve(data)
-          })
-        }
-      })
-    });
-  }
-
-  async buildMLModel(){
-    const backendLocation = 'https://heart-disease-backend.herokuapp.com/';
-    const csvDataset = tf.data.csv(
-      backendLocation, {
-        columnConfigs: {
-          target: {
-            isLabel: true
-          }
-        }
-      });
-
-      const numOfFeatures = 8;
-      
+  handleChange(event){
+    let colName = event.target.name
+    let value = event.target.value
     
-    // Prepare Dataset
-
-   const flattenedDataset = await csvDataset.map((row) =>{
-     console.log(row)
-     const xs = [Number(row.xs.age), Number(row.xs.cp), Number(row.xs.exang), Number(row.xs.oldpeak), Number(row.xs.sex), Number(row.xs.slope), Number(row.xs.thalach), Number(row.xs.trestbps)]
-     console.log("xs", xs)
-     // Convert rows from object form (keyed by column name) to array form.
-     console.log("Flattening:", [Object.values(row.xs), [row.ys]])
-     return [xs, Number(row.ys.target)]
-    }) 
-
-
-
-
-  //  .batch(10);
-  console.log('flattenedDataset', flattenedDataset)
-  // // Define the model.
-  const model = tf.sequential();
-  model.add(tf.layers.dense({
-    inputShape: [numOfFeatures],
-    units: 1
-  }));
-  model.compile({
-    optimizer: tf.train.sgd(0.000001),
-    loss: 'meanSquaredError'
-  });
-
-  // // // Fit the model using the prepared Dataset
-  // return model.fitDataset(flattenedDataset, {
-  //   epochs: 10,
-  //   callbacks: {
-  //     onEpochEnd: async (epoch, logs) => {
-  //       console.log(epoch + ':' + logs.loss);
-  //     }
-  //   }
-  // });
-
+    this.setState({ [colName]: value})
   }
 
-  componentDidMount(){
-    this.fetchDataset()
+  fetchPrediction(){
+    return 1
   }
-
   
   render(){
     return (
       <div className='row predictor'>
         <form action="" className='col s12'>
           <div className='row'>
-            <p>
-              This is the predictor
-            </p>
-            <a href="#!" onClick={()=>this.buildMLModel()}>Click Me!</a>
+            <form onSubmit={this.fetchPrediction}>
+            <label htmlFor="age">Age: </label><input type="text" value={this.state.age} name='age' onChange={this.handleChange}/>
+            <label htmlFor="sex">Sex: </label><input name="sex" type="text" value={this.state.sex} onChange={this.handleChange}/>
+            <label htmlFor="cp">Chest Pain Type: </label> 
+            <select name="cp" value={this.state.cp} onChange={this.handleChange}>
+              <option value="1">Typical Angina</option>
+              <option value="2">Atypical Angina</option>
+              <option value="3">Non-Anginal Pain</option>
+              <option value="4">Asymptomatic</option>
+            </select>  
+            <label htmlFor="trestbps">Rest BPM: </label><input name="trestbps" type="text" value={this.state.trestbps} onChange={this.handleChange}/>
+            <label htmlFor="thalach">Max BPM: </label><input name="thalach" type="text" value={this.state.thalach} onChange={this.handleChange}/>
+            <label htmlFor="exang">Exercised Induced Angina: </label><input name="exang" type="text" value={this.state.exang} onChange={this.handleChange}/>
+            <label htmlFor="oldpeak">OldPeak: </label><input name="oldpeak" type="text" value={this.state.oldpeak} onChange={this.handleChange}/>
+            <label htmlFor="slope">Slope: </label><input name="slope" type="text" value={this.state.slope} onChange={this.handleChange}/>
+            <input type="submit" value="What's My Prediction"/>
+            </form>
           </div>
 
         </form>

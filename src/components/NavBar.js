@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../css/NavBar.css';
+import { Link } from 'react-router-dom';
 
 class NavBar extends Component {
 
@@ -33,7 +34,7 @@ class NavBar extends Component {
     return(
         <nav id='main-nav'>
           <div className="nav-wrapper">
-            <a href="#" className="brand-logo">Heart Disease Prediction</a>
+            <a href="#" className="nav-link"><Link to="/predictor">Heart Disease Prediction</Link></a>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               <li><a href="https://www.kaggle.com/panfritters/uci-heart-disease-dataset" onClick={()=>{
               console.log("This part coming soon!")
