@@ -34,7 +34,7 @@ class NavBar extends Component {
     return(
         <nav id='main-nav'>
           <div className="nav-wrapper">
-            <a href="#" className="nav-link"><Link to="/predictor">Heart Disease Prediction</Link></a>
+            <Link className="nav-link" to="/predictor">Heart Disease Prediction</Link>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               <li><a href="https://www.kaggle.com/panfritters/uci-heart-disease-dataset" onClick={()=>{
               console.log("This part coming soon!")
