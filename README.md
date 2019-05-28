@@ -22,4 +22,4 @@ This will download the required dependencies. After all dependencies are install
 
 ## Backend technology
 
-The backend is only a simple express server that serves React pages.
+The flask backend exists in a separate repository.
