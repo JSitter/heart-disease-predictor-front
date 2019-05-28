@@ -24,7 +24,6 @@ class Predictor extends Component {
   handleChange(event){
     let colName = event.target.name;
     let value = event.target.value;
-    
     this.setState({ [colName]: value});
   }
 
