@@ -47,7 +47,7 @@ class Predictor extends Component {
 
   fetchPrediction(e){
     e.preventDefault();
-    let backend_url = 'https://heart-disease-backend.herokuapp.com/api/predict';
+    let backend_url = 'https://heart-disease-backend.herokuapp.com/api/predict/';
     fetch(backend_url, {
       method: 'post',
       mode: 'no-cors',
