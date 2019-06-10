@@ -36,7 +36,7 @@ class Predictor extends Component {
 
   fetchPrediction(e){
     e.preventDefault();
-    console.log(this.state)
+    console.log("current state", this.state)
     let required_params = [
       'age',
       'sex',
@@ -48,20 +48,22 @@ class Predictor extends Component {
       'slope'
     ]
 
-    
-
-    let backend_url = 'https://heart-disease-backend.herokuapp.com/api/predict/';
-    fetch(backend_url, {
-      method: 'post',
-      cache: 'no-cache',
-      mode: 'no-cors',
-      headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, HEAD'
-      },
-      body: JSON.stringify({
+    let missing_params = []
+    required_params.forEach((item)=>{
+      try {
+        if (!this.state[item]){
+          missing_params.push(item)
+        }
+      } catch (error) {
+        missing_params.push(item)
+      }
+    })
+    console.log("missing parameters: ", missing_params)
+    if(missing_params.length > 0){
+      alert("Missing Required parameters"+missing_params.join(' '))
+    }else{
+      let backend_url = 'https://heart-disease-backend.herokuapp.com/api/predict/';
+      let body_string = JSON.stringify({
         'age':this.state.age,
         'sex':this.state.sex,
         'cp':this.state.cp,
@@ -70,17 +72,30 @@ class Predictor extends Component {
         'exang':this.state.exang,
         'oldpeak' :this.state.oldpeak,
         'slope':this.state.slope
-      })
-    }).then((response)=>{
-      
-      if(response.status !== 200){
-        console.log("err", response)
-      }else{
-        response.json().then(data=>console.log(JSON.stringify(data)));
-      }
-      
-      
-    }).catch(err=>console.log("Error occured: ", err));
+      });
+      console.log("Payload", body_string);
+      fetch(backend_url, {
+        method: 'post',
+        cache: 'no-cache',
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Access-Control-Allow-Origin': 'https://heart-disease-backend.herokuapp.com',
+          'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, HEAD'
+        },
+        body: body_string
+      }).then((response)=>{
+        
+        if(response.status !== 200){
+           response.text().then(text => console.log("Server Error: ", text))
+        }else{
+          response.json().then(data=>console.log(JSON.stringify(data)));
+        }
+        
+        
+      }).catch(err=>console.log("Error occured: ", err));
+
+    }
   }
   
   render(){
@@ -94,8 +109,9 @@ class Predictor extends Component {
 
               <label htmlFor="sex">Sex: 
                 <select name="sex" value={this.state.sex} onChange={this.handleChange}>
+                  <option disabled selected value=''>Choose One</option>
                   <option value="0">Female</option>
-                  <option value="1">Male</option>
+                  <option value="1"> Male</option>
                 </select>
               </label>
 
@@ -103,10 +119,11 @@ class Predictor extends Component {
                 Chest Pain Type: {this.state.cp}
                 
                 <select name="cp" value={this.state.cp} onChange={this.handleChange}>
-                  <option value="1">Typical Angina</option>
-                  <option value="2">Atypical Angina</option>
-                  <option value="3">Non-Anginal Pain</option>
-                  <option value="4">Asymptomatic</option>
+                  <option disabled selected value=''>Choose One</option>
+                  <option value='1'>Typical Angina</option>
+                  <option value='2'>Atypical Angina</option>
+                  <option value='3'>Non-Anginal Pain</option>
+                  <option value='4'>Asymptomatic</option>
                 </select>  
               </label>
               
@@ -120,6 +137,7 @@ class Predictor extends Component {
 
               <label htmlFor="exang">Exercise Induced Angina: 
                 <select name="exang" value={this.state.exang} onChange={this.handleChange}>
+                  <option disabled selected value=''>Choose One</option>
                   <option value="0">No</option>
                   <option value="1">Yes</option>
                 </select>
@@ -132,6 +150,7 @@ class Predictor extends Component {
               <label htmlFor="slope">
                 Upslope: 
                 <select name="slope" value={this.state.slope} onChange={this.handleChange}>
+                  <option disabled selected value=''>Choose One</option>
                   <option value="1">Upsloping</option>
                   <option value="2">Flat</option>
                   <option value="3">Downsloping</option>
