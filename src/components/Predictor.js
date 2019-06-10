@@ -21,7 +21,6 @@ class Predictor extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.fetchPrediction = this.fetchPrediction.bind(this);
-    this.testCors = this.testCors.bind(this);
   }
 
   componentDidMount(){
@@ -34,17 +33,6 @@ class Predictor extends Component {
     this.setState({ [colName]: value});
   }
 
-  testCors(event){
-    event.preventDefault();
-    let url = "https://heart-disease-predictor.herokuapp.com/api/predict/";
-    fetch(url, {
-      mode: 'no-cors',
-      method: 'post'
-    }).then(response =>{
-      response.text().then(json=>console.log(json));
-    });
-  }
-
   fetchPrediction(e){
     e.preventDefault();
     let backend_url = 'https://heart-disease-backend.herokuapp.com/api/predict/';
@@ -52,7 +40,6 @@ class Predictor extends Component {
       method: 'post',
       mode: 'no-cors',
       cache: 'no-cache',
-      credentials: 'same-origin',
       headers: {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/x-www-form-urlencoded'
