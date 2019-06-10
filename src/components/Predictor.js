@@ -31,7 +31,6 @@ class Predictor extends Component {
     let colName = event.target.name;
     let value = event.target.value;
     this.setState({ [colName]: value});
-    console.log('State changed', this.state);
   }
 
   fetchPrediction(e){
@@ -49,6 +48,7 @@ class Predictor extends Component {
     ]
 
     let missing_params = []
+
     required_params.forEach((item)=>{
       try {
         if (!this.state[item]){
@@ -58,12 +58,15 @@ class Predictor extends Component {
         missing_params.push(item)
       }
     })
+
     console.log("missing parameters: ", missing_params)
+
     if(missing_params.length > 0){
-      alert("Missing Required parameters"+missing_params.join(' '))
+      alert("Missing required parameters: "+missing_params.join(', '))
     }else{
+      // All parameters accounted for
       let backend_url = 'https://heart-disease-backend.herokuapp.com/api/predict/';
-      let body_string = JSON.stringify({
+      let payload_body = {
         'age':this.state.age,
         'sex':this.state.sex,
         'cp':this.state.cp,
@@ -72,8 +75,8 @@ class Predictor extends Component {
         'exang':this.state.exang,
         'oldpeak' :this.state.oldpeak,
         'slope':this.state.slope
-      });
-      console.log("Payload", body_string);
+      };
+      console.log("Payload", payload_body);
       fetch(backend_url, {
         method: 'post',
         cache: 'no-cache',
@@ -81,9 +84,9 @@ class Predictor extends Component {
           'Accept': 'application/json, text/plain, */*',
           'Content-Type': 'application/x-www-form-urlencoded',
           'Access-Control-Allow-Origin': 'https://heart-disease-backend.herokuapp.com',
-          'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, HEAD'
+          'Access-Control-Allow-Methods': 'POST'
         },
-        body: body_string
+        body: payload_body
       }).then((response)=>{
         
         if(response.status !== 200){
@@ -109,7 +112,7 @@ class Predictor extends Component {
 
               <label htmlFor="sex">Sex: 
                 <select name="sex" value={this.state.sex} onChange={this.handleChange}>
-                  <option disabled selected value=''>Choose One</option>
+                  <option disabled defaultValue value=''>Choose One</option>
                   <option value="0">Female</option>
                   <option value="1"> Male</option>
                 </select>
@@ -119,7 +122,7 @@ class Predictor extends Component {
                 Chest Pain Type: {this.state.cp}
                 
                 <select name="cp" value={this.state.cp} onChange={this.handleChange}>
-                  <option disabled selected value=''>Choose One</option>
+                  <option disabled defaultValue value=''>Choose One</option>
                   <option value='1'>Typical Angina</option>
                   <option value='2'>Atypical Angina</option>
                   <option value='3'>Non-Anginal Pain</option>
@@ -137,7 +140,7 @@ class Predictor extends Component {
 
               <label htmlFor="exang">Exercise Induced Angina: 
                 <select name="exang" value={this.state.exang} onChange={this.handleChange}>
-                  <option disabled selected value=''>Choose One</option>
+                  <option disabled defaultValue value=''>Choose One</option>
                   <option value="0">No</option>
                   <option value="1">Yes</option>
                 </select>
@@ -150,7 +153,7 @@ class Predictor extends Component {
               <label htmlFor="slope">
                 Upslope: 
                 <select name="slope" value={this.state.slope} onChange={this.handleChange}>
-                  <option disabled selected value=''>Choose One</option>
+                  <option disabled defaultValue value=''>Choose One</option>
                   <option value="1">Upsloping</option>
                   <option value="2">Flat</option>
                   <option value="3">Downsloping</option>
