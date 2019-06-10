@@ -6,7 +6,7 @@ class Result extends Component{
     return(
       <div>
       Your Score:
-      {this.props.predicted_result}
+      {this.props.prediction}
       </div>
     )
   }
