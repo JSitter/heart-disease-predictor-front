@@ -9,6 +9,8 @@ This is important because when making a prediction for disease it's generally mo
 The front end uses React and D3 to visualize heart disease data and show how a user's scores compare with the scores in the dataset.
 
 ## Installation
+
+### Docker
 To install clone this repository. 
 
 In the terminal `cd` into the project directory and run:
@@ -19,6 +21,20 @@ docker-compose up
 ```
 
 This will download the required dependencies. After all dependencies are installed the application will be available on 127.0.0.1:3000.
+
+### Installation without Docker
+
+`cd` into the project directory and run:
+
+```
+npm install
+```
+
+After installation is complete run:
+
+```
+npm start
+```
 
 ## Backend technology
 
