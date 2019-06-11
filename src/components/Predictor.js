@@ -17,7 +17,8 @@ class Predictor extends Component {
       'exang':'',
       'oldpeak' :'',
       'slope':'',
-      'target':''
+      'target':'',
+      'data' : ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.fetchPrediction = this.fetchPrediction.bind(this);
@@ -34,10 +35,14 @@ class Predictor extends Component {
     this.setState({ [colName]: value});
   }
   returnPrediction(prediction){
-    console.log(prediction)
-    console.log(prediction.target)
+    // console.log(prediction);
+    // console.log(prediction.target);
     alert("The predicted result: "+prediction.target);
-
+    this.setState({
+      target: prediction.target,
+      showResult: true,
+      data: prediction
+    });
   }
   fetchPrediction(e){
     e.preventDefault();
