@@ -21,6 +21,7 @@ class Predictor extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.fetchPrediction = this.fetchPrediction.bind(this);
+    this.returnPrediction = this.returnPrediction.bind(this);
   }
 
   componentDidMount(){
@@ -32,7 +33,12 @@ class Predictor extends Component {
     let value = event.target.value;
     this.setState({ [colName]: value});
   }
+  returnPrediction(prediction){
+    console.log(prediction)
+    console.log(prediction.target)
+    alert("The predicted result: "+prediction.target);
 
+  }
   fetchPrediction(e){
     e.preventDefault();
     console.log("current state", this.state)
@@ -64,8 +70,11 @@ class Predictor extends Component {
     if(missing_params.length > 0){
       alert("Missing required parameters: "+missing_params.join(', '))
     }else{
+
       // All parameters accounted for
+      // Prepare request to server
       let backend_url = 'https://heart-disease-backend.herokuapp.com/api/predict/';
+
       let payload_body = {
         'age':this.state.age,
         'sex':this.state.sex,
@@ -76,31 +85,40 @@ class Predictor extends Component {
         'oldpeak' :this.state.oldpeak,
         'slope':this.state.slope
       };
-      console.log("Payload", payload_body);
+
       fetch(backend_url, {
         method: 'post',
         cache: 'no-cache',
         headers: {
           'Accept': 'application/json, text/plain, */*',
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Access-Control-Allow-Origin': 'https://heart-disease-backend.herokuapp.com',
-          'Access-Control-Allow-Methods': 'POST'
+          'Content-type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'POST',
+          'Access-Control-Allow-Headers':'Origin, X-Requested-With, Content-Type, Accept'
         },
-        body: payload_body
+        body: JSON.stringify(payload_body)
       }).then((response)=>{
-        
+
         if(response.status !== 200){
-           response.text().then(text => console.log("Server Error: ", text))
+           response.text().then(text => {
+             console.log("Server Returned error: ", text);
+
+             alert("Server Returned Error: "+text+" Code: "+ response.status)
+           })
         }else{
-          response.json().then(data=>console.log(JSON.stringify(data)));
+          response.json().then(data=>{
+            this.returnPrediction(data)});
         }
-        
-        
-      }).catch(err=>console.log("Error occured: ", err));
+
+
+      }).catch((err)=>
+      {
+        console.log("General Error Occured: ", err);
+    });
 
     }
   }
-  
+
   render(){
     return (
           <div className='row col s12 predictor'>
@@ -110,7 +128,7 @@ class Predictor extends Component {
                 <input type="text" value={this.state.age} name='age' onChange={this.handleChange}/>
               </label>
 
-              <label htmlFor="sex">Sex: 
+              <label htmlFor="sex">Sex:
                 <select name="sex" value={this.state.sex} onChange={this.handleChange}>
                   <option disabled defaultValue value=''>Choose One</option>
                   <option value="0">Female</option>
@@ -120,16 +138,16 @@ class Predictor extends Component {
 
               <label htmlFor="cp">
                 Chest Pain Type: {this.state.cp}
-                
+
                 <select name="cp" value={this.state.cp} onChange={this.handleChange}>
                   <option disabled defaultValue value=''>Choose One</option>
                   <option value='1'>Typical Angina</option>
                   <option value='2'>Atypical Angina</option>
                   <option value='3'>Non-Anginal Pain</option>
                   <option value='4'>Asymptomatic</option>
-                </select>  
+                </select>
               </label>
-              
+
               <label htmlFor="trestbps">Resting Blood Pressure (mm Hg):
                 <input name="trestbps" type="text" value={this.state.trestbsp} onChange={this.handleChange}/>
               </label>
@@ -138,7 +156,7 @@ class Predictor extends Component {
                 <input name="thalach" type="text" value={this.state.thalach} onChange={this.handleChange}/>
               </label>
 
-              <label htmlFor="exang">Exercise Induced Angina: 
+              <label htmlFor="exang">Exercise Induced Angina:
                 <select name="exang" value={this.state.exang} onChange={this.handleChange}>
                   <option disabled defaultValue value=''>Choose One</option>
                   <option value="0">No</option>
@@ -146,12 +164,12 @@ class Predictor extends Component {
                 </select>
               </label>
 
-              <label htmlFor="oldpeak">OldPeak (Between 0 and 6): 
+              <label htmlFor="oldpeak">OldPeak (Between 0 and 6):
                 <input name="oldpeak" type="text" value={this.state.oldpeak} onChange={this.handleChange}/>
               </label>
 
               <label htmlFor="slope">
-                Upslope: 
+                Upslope:
                 <select name="slope" value={this.state.slope} onChange={this.handleChange}>
                   <option disabled defaultValue value=''>Choose One</option>
                   <option value="1">Upsloping</option>
