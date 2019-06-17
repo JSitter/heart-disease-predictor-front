@@ -1,3 +1,15 @@
 .predictor{
-  visibility: visible
+  display: grid;
+  padding-top: 50px;
+  position: relative;
+  
+}
+form{
+  position: relative;
+  z-index: 100;
+}
+
+form > input {
+  position: relative;
+  z-index: 400;
 }
