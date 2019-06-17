@@ -20,9 +20,11 @@ class Predictor extends Component {
       'target':'',
       'data' : ''
     };
+
     this.handleChange = this.handleChange.bind(this);
     this.fetchPrediction = this.fetchPrediction.bind(this);
     this.returnPrediction = this.returnPrediction.bind(this);
+    this.toggleResults = this.toggleResults.bind(this);
   }
 
   componentDidMount(){
@@ -37,13 +39,31 @@ class Predictor extends Component {
   returnPrediction(prediction){
     // console.log(prediction);
     // console.log(prediction.target);
-    alert("The predicted result: "+prediction.target);
-    this.setState({
-      target: prediction.target,
-      showResult: true,
-      data: prediction
-    });
+    // alert("The predicted result: "+prediction.target);
+    if(prediction.target){
+      this.setState({
+        target: 0,
+        showResult: true,
+        data: prediction
+      });
+    }else{
+      this.setState({
+        target: 1,
+        showResult: true,
+        data: prediction
+      });
+    } 
   }
+
+  toggleResults(){
+    if(this.state.showResult){
+      this.setState({showResult: false})
+    }else{
+      this.setState({showResult: true})
+    }
+  }
+
+
   fetchPrediction(e){
     e.preventDefault();
     console.log("current state", this.state)
@@ -91,6 +111,7 @@ class Predictor extends Component {
         'slope':this.state.slope
       };
 
+
       fetch(backend_url, {
         method: 'post',
         cache: 'no-cache',
@@ -118,7 +139,7 @@ class Predictor extends Component {
 
       }).catch((err)=>
       {
-        console.log("General Error Occured: ", err);
+        console.log("General Error Occurred: ", err);
     });
 
     }
@@ -127,7 +148,10 @@ class Predictor extends Component {
   render(){
     return (
           <div className='row col s12 predictor'>
-            {this.state.showResult ? <Result prediction={this.state.target}/> : null}
+            {this.state.showResult ? <Result 
+                                        prediction={this.state.target}
+                                        toggleResults={this.toggleResults}
+                                        /> : null}
             <form>
               <label htmlFor="age">Age:
                 <input type="text" value={this.state.age} name='age' onChange={this.handleChange}/>
