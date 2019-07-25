@@ -1,0 +1,26 @@
+$middle-grey: #545454;
+$off-black: #141414;
+
+footer{
+  width: 100%;
+  background-color: $off-black !important;
+  color: $middle-grey !important;
+  height: 500px;
+
+}
+
+footer > .container{
+  margin-top: 80px;
+}
+
+a:link{
+  color: rgb(160, 160, 160);
+}
+
+a:hover{
+  text-decoration: underline;
+}
+
+a:visited{
+  color: rgb(99, 99, 99)
+}
