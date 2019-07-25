@@ -1,5 +1,6 @@
 $off-white: #D8D8D8;
 $regular-margin: 25px;
+$header-top-margin: 20px;
 
 .App {
   display: flex;
@@ -11,7 +12,7 @@ $regular-margin: 25px;
 
 h1, h2, h3, h4 {
   font-family: Anton, Helvetica, sans-serif;
-  margin-top: 20px;
+  margin-top: $header-top-margin;
 }
 
 p {
