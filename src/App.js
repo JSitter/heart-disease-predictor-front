@@ -9,7 +9,7 @@ import Predictor from './components/Predictor';
 import Result from './components/Result';
 import { BrowserRouter, Route } from 'react-router-dom';
 
-import './css/App.css';
+import './css/App.scss';
 import './css/materialize.min.css';
 
 
