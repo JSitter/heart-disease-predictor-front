@@ -9,7 +9,7 @@ This is important because when making a prediction for disease it's generally mo
 The front end uses React and D3 to visualize heart disease data and show how a user's scores compare with the scores in the dataset.
 
 ## Installation
-To install clone this repository. 
+This project is setup to run with docker. After installing and running the docker daemon run the following commands to start this project.
 
 In the terminal `cd` into the project directory and run:
 
