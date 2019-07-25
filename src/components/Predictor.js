@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Result from './Result';
-import '../css/Predictor.css';
+import '../css/Predictor.scss';
 import 'materialize-css/dist/css/materialize.min.css';
 import M from 'materialize-css';
 
