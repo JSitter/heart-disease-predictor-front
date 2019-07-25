@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../css/ChartPanel.css';
+import '../css/ChartPanel.scss';
 
 class Header extends Component {
 
