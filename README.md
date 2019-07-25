@@ -14,12 +14,30 @@ This project is setup to run with docker. After installing and running the docke
 In the terminal `cd` into the project directory and run:
 
 ```
-docker-compose build
-docker-compose up
+$ docker-compose build
+```
+This will download the required dependencies and setup the project and may take some time to complete. After it's sucessfully built, run the project by using the command:
+
+```
+$ docker-compose up
 ```
 
 This will download the required dependencies. After all dependencies are installed the application will be available on 127.0.0.1:3000.
 
+### Installation without Docker
+
+`cd` into the project directory and run:
+
+```
+npm install
+```
+
+After installation is complete run:
+
+```
+npm start
+```
+
 ## Backend technology
 
-The backend is only a simple express server that serves React pages.
+The flask backend exists in a separate repository [here](https://github.com/JSitter/heart-disease-backend).
